@@ -26,7 +26,7 @@ namespace ETicaretAPI.API.Controllers
         }
 
         [HttpGet]
-        public async Task Get()
+        public async Task<IActionResult> Get()
         {
             //var customerId = Guid.NewGuid();
             //await _customerWriteRepository.AddAsync(new() {Id = customerId,Name ="Muiidddin" });
@@ -35,9 +35,7 @@ namespace ETicaretAPI.API.Controllers
             //await _orderWriteRepository.AddAsync(new() {Description ="bla bla bla 2",Address = "Ankara, Pursaklar", CustomerId = customerId });
             //await _orderWriteRepository.SaveAsync(); 
 
-            var order = await _orderReadRepository.GetByIdAsync("78563f7f-c744-4771-b4ac-e4f2b36ac847");
-            order.Address = "İstanbul";
-            await _orderWriteRepository.SaveAsync();
+            return Ok("Merhaba");
         }
        
     }
