@@ -117,7 +117,7 @@ namespace ETicaretAPI.API.Controllers
             //var d1 = _fileReadRepository.GetAll(false);
             //var d2 = _productImageFileReadRepository.GetAll(false);
             //var d3 = _invoiceFileReadRepository.GetAll(false);
-            var datas = await _storageService.UploadAsync("resource/files", Request.Form.Files);
+            var datas = await _storageService.UploadAsync("files", Request.Form.Files);
             await _productImageFileWriteRepository.AddRangeAsync(datas.Select(d => new ProductImageFile()
             {
                 FileName = d.fileName,
