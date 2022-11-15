@@ -2,6 +2,7 @@ using ETicaretAPI.Application.Validators.Products;
 using ETicaretAPI.Infrastructure;
 using ETicaretAPI.Infrastructure.Filters;
 using ETicaretAPI.Infrastructure.Services.Storage.Azure;
+using ETicaretAPI.Infrastructure.Services.Storage.Local;
 using ETicaretAPI.Persistence;
 using FluentValidation.AspNetCore;
 
@@ -13,6 +14,7 @@ builder.Services.AddPersistenceServices();
 builder.Services.AddInfrastructureServices();
 
 //builder.services.AddScoped<IStorage, LocalStorage>();
+//builder.Services.AddStorage<LocalStorage>();
 builder.Services.AddStorage<AzureStorage>();
 //builder.Services.AddStorage(StorageType.Local);
 
