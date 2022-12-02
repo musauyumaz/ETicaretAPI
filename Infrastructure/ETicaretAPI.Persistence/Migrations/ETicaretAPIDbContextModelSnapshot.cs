@@ -382,6 +382,9 @@ namespace ETicaretAPI.Persistence.Migrations
                 {
                     b.HasBaseType("ETicaretAPI.Domain.Entities.File");
 
+                    b.Property<bool>("Showcase")
+                        .HasColumnType("boolean");
+
                     b.HasDiscriminator().HasValue("ProductImageFile");
                 });
 
