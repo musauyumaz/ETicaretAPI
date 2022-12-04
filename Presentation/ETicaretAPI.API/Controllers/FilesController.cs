@@ -20,6 +20,7 @@ namespace ETicaretAPI.API.Controllers
             {
                 Url = _configuration["BaseStorageUrl"]
             });
+            
         }
     }
 }
