@@ -85,7 +85,8 @@ namespace ETicaretAPI.Persistence.Services
         public async Task<List<BasketItem>> GetBasketItemsAsync()
         {
             Basket? basket = await ContextUser();
-            Basket? result = await _basketReadRepository.Table.Include(b => b.BasketItems)
+            Basket? result = await _basketReadRepository.Table
+                .Include(b => b.BasketItems)
                 .ThenInclude(bi => bi.Product)
                 .FirstOrDefaultAsync(b => b.Id == basket.Id);
 
