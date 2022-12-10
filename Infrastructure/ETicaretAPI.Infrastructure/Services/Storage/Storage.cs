@@ -63,7 +63,7 @@ namespace ETicaretAPI.Infrastructure.Services.Storage
             string changedFileName = $"{NameOperation.CharacterRegulatory(Path.GetFileNameWithoutExtension(fileName))}{extension}";
 
             if (!hasFileMethod(pathOrContainerName, changedFileName))
-                return changedFileName;
+                return changedFileName + extension;
 
             else
             {

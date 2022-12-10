@@ -47,7 +47,8 @@ namespace ETicaretAPI.Infrastructure.Operations
                 .Replace("ç", "c")
                 .Replace("<", "")
                 .Replace(">", "")
-                .Replace("|", "");
+                .Replace("|", "")
+                .Replace(" ", "");
 
 
     }
