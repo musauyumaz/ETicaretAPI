@@ -3,7 +3,6 @@ using ETicaretAPI.Application.Features.Queries.Order.GetAllOrder;
 using ETicaretAPI.Application.Features.Queries.Order.GetOrderById;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ETicaretAPI.API.Controllers
@@ -14,7 +13,7 @@ namespace ETicaretAPI.API.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly IMediator _mediator;
-
+        
         public OrdersController(IMediator mediator)
         {
             _mediator = mediator;
@@ -38,5 +37,6 @@ namespace ETicaretAPI.API.Controllers
             GetOrderByIdQueryResponse response = await _mediator.Send(getOrderByIdQueryRequest);
             return Ok(response);
         }
+       
     }
 }
