@@ -1,7 +1,9 @@
 ﻿using ETicaretAPI.Application.Features.Commands.AppUser.FacebookLogin;
 using ETicaretAPI.Application.Features.Commands.AppUser.GoogleLogin;
 using ETicaretAPI.Application.Features.Commands.AppUser.LoginUser;
+using ETicaretAPI.Application.Features.Commands.AppUser.PasswordReset;
 using ETicaretAPI.Application.Features.Commands.AppUser.RefreshTokenLogin;
+using ETicaretAPI.Application.Features.Commands.AppUser.VerifyResetToken;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,7 +27,7 @@ namespace ETicaretAPI.API.Controllers
             return Ok(response);
         }
         [HttpPost("[action]")]
-        public async Task<IActionResult> RefreshTokenLogin([FromBody]RefreshTokenLoginCommandRequest refreshTokenLoginCommandRequest)
+        public async Task<IActionResult> RefreshTokenLogin([FromBody] RefreshTokenLoginCommandRequest refreshTokenLoginCommandRequest)
         {
             RefreshTokenLoginCommandResponse response = await _mediator.Send(refreshTokenLoginCommandRequest);
             return Ok(response);
@@ -40,6 +42,18 @@ namespace ETicaretAPI.API.Controllers
         public async Task<IActionResult> FacebookLogin(FacebookLoginCommandRequest facebookLoginCommandRequest)
         {
             FacebookLoginCommandResponse response = await _mediator.Send(facebookLoginCommandRequest);
+            return Ok(response);
+        }
+        [HttpPost("password-reset")]
+        public async Task<IActionResult> PasswordReset([FromBody] PasswordResetCommandRequest passwordResetCommandRequest)
+        {
+            PasswordResetCommandResponse response = await _mediator.Send(passwordResetCommandRequest);
+            return Ok(response);
+        }
+        [HttpPost("verify-reset-token")]
+        public async Task<IActionResult> VerifyResetToken([FromBody] VerifyResetTokenCommandRequest verifyResetTokenCommandRequest)
+        {
+            VerifyResetTokenCommandResponse response = await _mediator.Send(verifyResetTokenCommandRequest);
             return Ok(response);
         }
     }

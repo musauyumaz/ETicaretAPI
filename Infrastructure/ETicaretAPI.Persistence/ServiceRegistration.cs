@@ -6,6 +6,7 @@ using ETicaretAPI.Persistence.Configurations;
 using ETicaretAPI.Persistence.Contexts;
 using ETicaretAPI.Persistence.Repositories;
 using ETicaretAPI.Persistence.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,7 +16,7 @@ namespace ETicaretAPI.Persistence
     {
         public static void AddPersistenceServices(this IServiceCollection services)
         {
-            
+
 
             services.AddDbContext<ETicaretAPIDbContext>(options => options.UseNpgsql(Configuration.ConnectionString));
             services.AddIdentity<AppUser, AppRole>(options =>
@@ -26,16 +27,17 @@ namespace ETicaretAPI.Persistence
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
 
-            }).AddEntityFrameworkStores<ETicaretAPIDbContext>();
+            }).AddEntityFrameworkStores<ETicaretAPIDbContext>()
+            .AddDefaultTokenProviders();
 
-            services.AddScoped<ICustomerReadRepository,CustomerReadRepository>();
-            services.AddScoped<ICustomerWriteRepository,CustomerWriteRepository>();
-            services.AddScoped<IOrderReadRepository,OrderReadRepository>();
-            services.AddScoped<IOrderWriteRepository,OrderWriteRepository>();
-            services.AddScoped<IProductReadRepository,ProductReadRepository>();
-            services.AddScoped<IProductWriteRepository,ProductWriteRepository>();
-            services.AddScoped<IFileReadRepository,FileReadRepository>();
-            services.AddScoped<IFileWriteRepository,FileWriteRepository>();
+            services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
+            services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
+            services.AddScoped<IOrderReadRepository, OrderReadRepository>();
+            services.AddScoped<IOrderWriteRepository, OrderWriteRepository>();
+            services.AddScoped<IProductReadRepository, ProductReadRepository>();
+            services.AddScoped<IProductWriteRepository, ProductWriteRepository>();
+            services.AddScoped<IFileReadRepository, FileReadRepository>();
+            services.AddScoped<IFileWriteRepository, FileWriteRepository>();
             services.AddScoped<IInvoiceFileReadRepository, InvoiceFileReadRepository>();
             services.AddScoped<IInvoiceFileWriteRepository, InvoiceFileWriteRepository>();
             services.AddScoped<IProductImageFileReadRepository, ProductImageFileReadRepository>();
@@ -44,7 +46,7 @@ namespace ETicaretAPI.Persistence
             services.AddScoped<IBasketItemWriteRepository, BasketItemWriteRepository>();
             services.AddScoped<IBasketWriteRepository, BasketWriteRepository>();
             services.AddScoped<IBasketReadRepository, BasketReadRepository>();
-            
+
 
 
             services.AddScoped<IUserService, UserService>();
