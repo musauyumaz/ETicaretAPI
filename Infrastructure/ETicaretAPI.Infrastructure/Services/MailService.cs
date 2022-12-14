@@ -34,20 +34,16 @@ namespace ETicaretAPI.Infrastructure.Services
                 mail.To.Add(new MailAddress(to));
             mail.Subject = subject;
             mail.Body = body;
-            mail.From = new("tt7833827@gmail.com", "NG E-Ticaret", Encoding.UTF8);
+            mail.From = new(_configuration["Mail:Username"], "NG E-Ticaret", Encoding.UTF8);
             await smtp.SendMailAsync(mail);
         }
 
         public async Task SendPasswordResetMailAsync(string to, string userId, string resetToken)
         {
             StringBuilder mail = new();
-            mail.AppendLine("Merhaba<br>Eğer yeni şifre talebinde bulunduysanız aşağıdaki linkten şifrenizi yenileyebilirsiniz.<br><strong><a target='_blank' href='.............../>");
-            mail.AppendLine(_configuration["AngularClientUrl"]);
-            mail.AppendLine("/update-password/");
-            mail.AppendLine(userId);
-            mail.AppendLine("/");
-            mail.AppendLine(resetToken);
-            mail.AppendLine("'>Yeni Şifre Talebi İçin Tıklayınız...</a></strong><br><br><span style='font-size:12px'>Eğer ki bu talep tarafınızca gerçekleştirilmemişse lütfen bu maili ciddiye almayınız.</span><br>Saygılarımızla...<br><br><br>NG - Mini|E-Ticaret");
+            string metin = $@"Merhaba<br>Eğer yeni şifre talebinde bulunduysanız aşağıdaki linkten şifrenizi yenileyebilirsiniz.<br><strong><a target='_blank' href='{_configuration["AngularClientUrl"]}/update-password/{userId}/{resetToken}'>Yeni şifre talebi için tıklayınız...</a></strong><br><br><span style='font-size:12px;'>NOT : Eğer ki bu talep tarafınızca gerçekleştirilmemişse lütfen bu maili ciddiye almayınız.</span><br>Saygılarımızla...<br><br><br>NG - Mini|E-Ticaret";
+
+            mail.AppendLine(metin);
 
             await SendMailAsync(to, "Şifre Yenileme Talebi", mail.ToString());
         }

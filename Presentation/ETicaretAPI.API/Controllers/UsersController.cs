@@ -23,12 +23,12 @@ namespace ETicaretAPI.API.Controllers
             CreateUserCommandResponse response = await _mediator.Send(createUserCommandRequest);
             return Ok(response);
         }
-        //[HttpGet]
-        //public async Task<IActionResult> ExampleMailTest()
-        //{
-        //    await _mailService.SendMailAsync("tt7833827@gmail.com", "<strong>Örnek Mail", "Bu bir örnek maildir.</strong> Test");
-        //    return Ok();
-        //}
+        [HttpGet]
+        public async Task<IActionResult> ExampleMailTest()
+        {
+            await _mailService.SendMailAsync("musa.uyumaz73@gmail.com", "Örnek Mail", "<strong>Bu bir örnek maildir.</strong> Test");
+            return Ok();
+        }
         [HttpPost("update-password")]
         public async Task<IActionResult> UpdatePassword([FromBody]UpdatePasswordCommandRequest updatePasswordCommandRequest)
         {
