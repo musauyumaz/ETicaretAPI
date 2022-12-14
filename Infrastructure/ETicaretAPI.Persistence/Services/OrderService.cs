@@ -96,7 +96,7 @@ namespace ETicaretAPI.Persistence.Services
 
             var data2 = await (from order in data
                                join completedOrder in _completedOrderReadRepository.Table
-                                   on order.Id equals completedOrder.Id into co
+                                   on order.Id equals completedOrder.OrderId into co
                                from _co in co.DefaultIfEmpty()
                                select new
                                {
