@@ -15,6 +15,13 @@ namespace ETicaretAPI.Infrastructure.Services
             _configuration = configuration;
         }
 
+        public async Task SendCompletedOrderMailAsync(string to, string orderCode, DateTime orderDate, string fullName)
+        {
+            string mail = $"Sayın {fullName} Merhaba<br> {orderDate} tarihinde vermiş olduğunuz {orderCode} kodlu siparişiniz tamamnlanmış ve kargo firmasına verilmiştir.<br> Hayrını görünüz efendim...";
+
+            await SendMailAsync(to,$"{orderCode} Sipariş Numaralı Siparişiniz Tamamlandı",mail); 
+        }
+
         public async Task SendMailAsync(string to, string subject, string body, bool isBodyHtml = true)
         {
             await SendMailAsync(new[] { to }, subject, body, isBodyHtml);
@@ -41,9 +48,9 @@ namespace ETicaretAPI.Infrastructure.Services
         public async Task SendPasswordResetMailAsync(string to, string userId, string resetToken)
         {
             StringBuilder mail = new();
-            string metin = $@"Merhaba<br>Eğer yeni şifre talebinde bulunduysanız aşağıdaki linkten şifrenizi yenileyebilirsiniz.<br><strong><a target='_blank' href='{_configuration["AngularClientUrl"]}/update-password/{userId}/{resetToken}'>Yeni şifre talebi için tıklayınız...</a></strong><br><br><span style='font-size:12px;'>NOT : Eğer ki bu talep tarafınızca gerçekleştirilmemişse lütfen bu maili ciddiye almayınız.</span><br>Saygılarımızla...<br><br><br>NG - Mini|E-Ticaret";
+            string text = $@"Merhaba<br>Eğer yeni şifre talebinde bulunduysanız aşağıdaki linkten şifrenizi yenileyebilirsiniz.<br><strong><a target='_blank' href='{_configuration["AngularClientUrl"]}/update-password/{userId}/{resetToken}'>Yeni şifre talebi için tıklayınız...</a></strong><br><br><span style='font-size:12px;'>NOT : Eğer ki bu talep tarafınızca gerçekleştirilmemişse lütfen bu maili ciddiye almayınız.</span><br>Saygılarımızla...<br><br><br>NG - Mini|E-Ticaret";
 
-            mail.AppendLine(metin);
+            mail.AppendLine(text);
 
             await SendMailAsync(to, "Şifre Yenileme Talebi", mail.ToString());
         }
