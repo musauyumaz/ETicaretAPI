@@ -22,7 +22,7 @@ namespace ETicaretAPI.Application.Features.Queries.AppUser.GetRolesToUser
 
         public async Task<GetRolesToUserQueryResponse> Handle(GetRolesToUserQueryRequest request, CancellationToken cancellationToken)
         {
-            var userRoles = await _userService.GetRolesToUser(request.UserId);
+            var userRoles = await _userService.GetRolesToUserAsync(request.UserId);
             return new()
             {
                 UserRoles = userRoles,
