@@ -21,12 +21,13 @@ namespace ETicaretAPI.Infrastructure
             services.AddScoped<ITokenHandler, TokenHandler>();
             services.AddScoped<IMailService, MailService>();
             services.AddScoped<IApplicationService, ApplicationService>();
+            services.AddScoped<IQRCodeService, QRCodeService>();
         }
         public static void AddStorage<T>(this IServiceCollection services) where T : Storage, IStorage
         {
             services.AddScoped<IStorage, T>();
         }
-        public static void AddStorage(this IServiceCollection services,StorageType storageType)
+        public static void AddStorage(this IServiceCollection services, StorageType storageType)
         {
             switch (storageType)
             {
