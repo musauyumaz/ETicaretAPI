@@ -5,7 +5,6 @@ using ETicaretAPI.Application.Enums;
 using ETicaretAPI.Application.Features.Commands.Product.CreateProduct;
 using ETicaretAPI.Application.Features.Commands.Product.RemoveProduct;
 using ETicaretAPI.Application.Features.Commands.Product.UpdateProduct;
-using ETicaretAPI.Application.Features.Commands.Product.UpdateStockQrCodeToProduct;
 using ETicaretAPI.Application.Features.Commands.ProductImageFile.ChangeShowCaseImage;
 using ETicaretAPI.Application.Features.Commands.ProductImageFile.RemoveProductImage;
 using ETicaretAPI.Application.Features.Commands.ProductImageFile.UploadProductImage;
@@ -42,12 +41,6 @@ namespace ETicaretAPI.API.Controllers
         {
             var data = await _productService.QrCodeToProductAsync(productId);
             return File(data,"image/png");
-        }
-        [HttpPut("qrcode")]
-        public async Task<IActionResult> UpdateStockQrCodeToProduct([FromBody] UpdateStockQrCodeToProductCommandRequest updateStockQrCodeToProductCommandRequest)
-        {
-            UpdateStockQrCodeToProductCommandResponse response = await _mediator.Send(updateStockQrCodeToProductCommandRequest);
-            return Ok(response);
         }
         [HttpGet("{Id}")]
         public async Task<IActionResult> Get([FromRoute] GetByIdProductQueryRequest getByIdProductQueryRequest)
